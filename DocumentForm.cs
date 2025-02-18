@@ -104,8 +104,8 @@ namespace MDIPaint
                         {
                             var g = Graphics.FromImage(bitmap);
                             g.DrawLine(pen, oldX, oldY, adjustedX, adjustedY);
-                            oldX = adjustedX; 
-                            oldY = adjustedY; 
+                            oldX = adjustedX;
+                            oldY = adjustedY;
                             bmpTemp = bitmap;
                             Invalidate();
                             break;
@@ -144,13 +144,13 @@ namespace MDIPaint
                         {
                             var g = Graphics.FromImage(bmpTemp);
                             g.FillEllipse(new SolidBrush(MainForm.CurColor), adjustedX - MainForm.CurSize / 2, adjustedY - MainForm.CurSize / 2, MainForm.CurSize, MainForm.CurSize);
-                            oldX = adjustedX; 
-                            oldY = adjustedY; 
+                            oldX = adjustedX;
+                            oldY = adjustedY;
                             bmpTemp = bitmap;
                             Invalidate();
                             break;
                         }
-                     case Tool.Bucket: 
+                    case Tool.Bucket:
                         {
                             Color targetColor = bitmap.GetPixel(adjustedX, adjustedY);
                             Color replacementColor = MainForm.CurColor;
@@ -167,19 +167,19 @@ namespace MDIPaint
                         {
                             bmpTemp = (Bitmap)bitmap.Clone();
                             var g = Graphics.FromImage(bmpTemp);
-                            DrawPolygon(g, MainForm.PolygonSides, oldX, oldY, adjustedX, adjustedY, pen,MainForm.isZalivka);
-                            
+                            DrawPolygon(g, MainForm.PolygonSides, oldX, oldY, adjustedX, adjustedY, pen, MainForm.isZalivka);
+
                             Invalidate();
                             break;
                         }
                     case Tool.Text:
                         {
                             bmpTemp = (Bitmap)bitmap.Clone();
-                            var g= Graphics.FromImage(bmpTemp);
+                            var g = Graphics.FromImage(bmpTemp);
 
                             var dlg = new Dialog();
                             dlg.ShowDialog();
-                            string inputText=dlg.inText;
+                            string inputText = dlg.inText;
                             g.DrawString(inputText, new Font("Arial", 12), new SolidBrush(MainForm.CurColor), adjustedX, adjustedY);
                             bitmap = bmpTemp;
                             Invalidate();
@@ -188,7 +188,7 @@ namespace MDIPaint
                 }
             }
         }
-        private void DrawPolygon(Graphics g, int sides, int x1, int y1, int x2, int y2, Pen pen,bool isZalivka)
+        private void DrawPolygon(Graphics g, int sides, int x1, int y1, int x2, int y2, Pen pen, bool isZalivka)
         {
             double radius = Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2));
             double angle = Math.Atan2(y2 - y1, x2 - x1);
@@ -202,7 +202,7 @@ namespace MDIPaint
                     (float)(y1 + radius * Math.Sin(theta))
                 );
             }
-            if(isZalivka) 
+            if (isZalivka)
                 g.FillPolygon(new SolidBrush(MainForm.CurColor), points);
             else
                 g.DrawPolygon(pen, points);
@@ -210,7 +210,8 @@ namespace MDIPaint
         }
         private void FloodFill(int x, int y, Color targetColor, Color replacementColor)
         {
-            try {
+            try
+            {
                 if (x < 0 || x >= bitmap.Width || y < 0 || y >= bitmap.Height)
                     return;
 
@@ -227,7 +228,7 @@ namespace MDIPaint
                 FloodFill(x, y + 1, targetColor, replacementColor);
                 FloodFill(x, y - 1, targetColor, replacementColor);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return;
             }
@@ -240,7 +241,7 @@ namespace MDIPaint
                 Graphics g = e.Graphics;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-                
+
                 int newWidth = (int)(bitmap.Width * zoomFactor);
                 int newHeight = (int)(bitmap.Height * zoomFactor);
 

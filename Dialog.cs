@@ -33,12 +33,12 @@ namespace MDIPaint
         {
             if (string.IsNullOrEmpty(textBox1.Text))
             {
-                inText = textBox1.Text; 
+                inText = textBox1.Text;
                 return;
             }
             else
-                inText= textBox1.Text;
-            
+                inText = textBox1.Text;
+
         }
     }
 }

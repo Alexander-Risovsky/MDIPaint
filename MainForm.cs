@@ -32,7 +32,7 @@ namespace MDIPaint
             CurSize = 1;
             CurTool = Tool.Pen;
             isZalivka = false;
-            
+
         }
 
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,24 +43,24 @@ namespace MDIPaint
 
         private void новыйToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var doc=new DocumentForm();
-            doc.MdiParent= this;
+            var doc = new DocumentForm();
+            doc.MdiParent = this;
             сохранитьToolStripMenuItem.Enabled = true;
             сохранитьКакToolStripMenuItem.Enabled = true;
-         
+
             doc.Show();
 
         }
         public void UpdateMenu()
         {
-            bool isActive=Application.OpenForms.Cast<Form>().Any(f => f is DocumentForm);
+            bool isActive = Application.OpenForms.Cast<Form>().Any(f => f is DocumentForm);
             сохранитьToolStripMenuItem.Enabled = isActive;
             сохранитьКакToolStripMenuItem.Enabled = isActive;
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm=new AboutForm();
+            var frm = new AboutForm();
             frm.ShowDialog();
         }
 
@@ -86,7 +86,7 @@ namespace MDIPaint
             if (CurTool == Tool.Lastik)
                 MessageBox.Show("Сначала поменяйте инструмент", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
-                CurColor=Color.Green;
+                CurColor = Color.Green;
         }
 
         private void другиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,7 +159,7 @@ namespace MDIPaint
             ToolSave(activeDocumentForm);
         }
 
-          
+
 
         private void MainForm_MdiChildActivate(object sender, EventArgs e)
         {
@@ -172,12 +172,12 @@ namespace MDIPaint
             if (ActiveMdiChild != null)
                 LayoutMdi(MdiLayout.Cascade);
             else
-                MessageBox.Show("Нет достпуных форм","Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Нет достпуных форм", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void сверхуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             if (ActiveMdiChild != null)
                 LayoutMdi(MdiLayout.TileVertical);
             else
@@ -186,7 +186,7 @@ namespace MDIPaint
 
         private void слеваНаправоToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             if (ActiveMdiChild != null)
                 LayoutMdi(MdiLayout.TileHorizontal);
             else
@@ -195,7 +195,7 @@ namespace MDIPaint
 
         private void упорядочитьЗначкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             if (ActiveMdiChild != null)
                 LayoutMdi(MdiLayout.ArrangeIcons);
             else
@@ -255,14 +255,14 @@ namespace MDIPaint
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            CurTool = Tool.Lastik ;
+            CurTool = Tool.Lastik;
             CurColor = Color.White;
             SetTool(CurTool);
-            ActiveZalivka();   
+            ActiveZalivka();
         }
-        public  void ActiveZalivka()
+        public void ActiveZalivka()
         {
-            bool isTool=CurTool == Tool.Circle | CurTool == Tool.Rectangle | CurTool==Tool.Polygon;
+            bool isTool = CurTool == Tool.Circle | CurTool == Tool.Rectangle | CurTool == Tool.Polygon;
             toolStripDropDownButton3.Enabled = isTool;
         }
 
@@ -296,7 +296,7 @@ namespace MDIPaint
             }
         }
 
-        
+
 
         private void безЗаливкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -305,8 +305,8 @@ namespace MDIPaint
 
         private void сплошнаяЗаливкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(CurTool!=Tool.Lastik) 
-                isZalivka=true;
+            if (CurTool != Tool.Lastik)
+                isZalivka = true;
             else
                 MessageBox.Show("Сначала поменяйте инструмент", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
